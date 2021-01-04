@@ -48,38 +48,40 @@ export default function App() {
           <div className="container px-5 pb-24 mx-auto">
             <div className="flex flex-wrap -m-4">
               {readmes.length
-                ? readmes.map((readme) => {
-                    return (
-                      <article
-                        key={readme.APIurl}
-                        onClick={(e) => {
-                          handlePreviewClick(readme, e);
-                        }}
-                        className="w-full p-4"
-                      >
-                        <div className="bg-white p-6 rounded-lg shadow-lg">
-                          <h3 className="tracking-widest text-blue-500 text-xs uppercase">built by</h3>
-                          <a className="text-lg text-gray-300 mb-4 inline-flex items-center hover:text-gray-600" href={readme.ownerLink} target="_blank" rel="noreferrer noopener">
-                            <span className="text-gray-700">{readme.owner}</span>
-                            <ExternalLink size={16} className="ml-2 transition-colors" />
-                          </a>
-                          <div className="flex justify-center md:justify-end">
-                            <button
-                              onClick={(e) => {
-                                handlePreviewClick(readme, e);
-                              }}
-                              className="inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-blue-700 rounded-full leading-tight"
-                            >
-                              Preview
-                            </button>
-                            <a className="ml-4 inline-flex text-gray-500 border-0 py-2 px-6 focus:outline-none hover:text-gray-700 rounded-full leading-tight" href={readme.githubLink} target="_blank" rel="noreferrer noopener">
-                              View on GitHub
+                ? readmes
+                    .sort((a, b) => (a.owner > b.owner ? 1 : b.owner > a.owner ? -1 : 0))
+                    .map((readme) => {
+                      return (
+                        <article
+                          key={readme.APIurl}
+                          onClick={(e) => {
+                            handlePreviewClick(readme, e);
+                          }}
+                          className="w-full p-4"
+                        >
+                          <div className="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 className="tracking-widest text-blue-500 text-xs uppercase">built by</h3>
+                            <a className="text-lg text-gray-300 mb-4 inline-flex items-center hover:text-gray-600" href={readme.ownerLink} target="_blank" rel="noreferrer noopener">
+                              <span className="text-gray-700">{readme.owner}</span>
+                              <ExternalLink size={16} className="ml-2 transition-colors" />
                             </a>
+                            <div className="flex justify-center md:justify-end">
+                              <button
+                                onClick={(e) => {
+                                  handlePreviewClick(readme, e);
+                                }}
+                                className="inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-blue-700 rounded-full leading-tight"
+                              >
+                                Preview
+                              </button>
+                              <a className="ml-4 inline-flex text-gray-500 border-0 py-2 px-6 focus:outline-none hover:text-gray-700 rounded-full leading-tight" href={readme.githubLink} target="_blank" rel="noreferrer noopener">
+                                View on GitHub
+                              </a>
+                            </div>
                           </div>
-                        </div>
-                      </article>
-                    );
-                  })
+                        </article>
+                      );
+                    })
                 : null}
             </div>
           </div>
