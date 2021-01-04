@@ -1,18 +1,26 @@
 import { useState } from "react";
 import ReactMarkdownWithHtml from "react-markdown/with-html";
 import gfm from "remark-gfm";
-import { ExternalLink } from "react-feather";
+import { ExternalLink, GitHub } from "react-feather";
 
 import readmes from "./data/readmes";
 
 import Header from "./components/Header";
 
 export default function App() {
-  const [selectedReadme, setSelectedReadme] = useState(false);
+  const [allReadmes, setAllReadmes] = useState(
+    readmes.map((readme) => {
+      return {
+        ...readme,
+        active: false,
+        content: false,
+      };
+    })
+  );
+  const selectedReadme = allReadmes.find((readme) => readme.active) || false;
 
-  const handleData = (response, readmeObject) => {
-    const encodedContent = response.content;
-    const decodedContent = decodeURIComponent(
+  const decodeContent = (encodedContent) => {
+    return decodeURIComponent(
       atob(encodedContent)
         .split("")
         .map(function (c) {
@@ -20,23 +28,34 @@ export default function App() {
         })
         .join("")
     );
-
-    setSelectedReadme({
-      ...readmeObject,
-      content: decodedContent,
-    });
   };
 
-  const handlePreviewClick = (readme, event) => {
-    event.stopPropagation();
+  const handleData = (response, readmeObject) => {
+    const encodedContent = response.content;
+    const decodedContent = decodeContent(encodedContent);
 
+    // Update the content of the matching readme and set it to active
+    const updatedReadme = { ...readmeObject, content: decodedContent, active: true };
+    const updatedReadmes = allReadmes.map((el) => (el.APIurl === updatedReadme.APIurl ? updatedReadme : { ...el, active: false }));
+    setAllReadmes(updatedReadmes);
+  };
+
+  const handlePreviewClick = (readme) => {
+    // No need to fetch new data when its already present
+    if (readme.content) {
+      // Set all readmes active to false and set the selected one to true
+      const updatedReadmes = allReadmes.map((el) => (el.APIurl === readme.APIurl ? { ...readme, active: true } : { ...el, active: false }));
+      setAllReadmes(updatedReadmes);
+    }
+
+    // Fetch data if readme doesn't have a content key
     return fetch(readme.APIurl)
       .then((result) => result.json())
       .then((response) => handleData(response, readme))
       .catch((err) => console.log(err));
   };
 
-  const copyMarkdownToClipboard = (readmeContent, event) => {
+  const copyMarkdownToClipboard = (readmeContent) => {
     const el = document.createElement("textarea");
     el.value = readmeContent;
     el.setAttribute("readonly", "");
@@ -48,6 +67,22 @@ export default function App() {
     document.body.removeChild(el);
   };
 
+  const handleMarkdownCopyClick = (readme) => {
+    if (readme.content) {
+      return copyMarkdownToClipboard(readme.content);
+    }
+
+    fetch(readme.APIurl)
+      .then((result) => result.json())
+      .then((response) => decodeContent(response.content))
+      .then((decodedContent) => {
+        const updatedReadmes = allReadmes.map((el) => (el.APIurl === readme.APIurl ? { ...readme, content: decodedContent } : el));
+        setAllReadmes(updatedReadmes);
+        copyMarkdownToClipboard(decodedContent);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <Header />
@@ -55,35 +90,38 @@ export default function App() {
         <section className="w-full max-w-2xl text-gray-700">
           <div className="container px-5 pb-24 mx-auto">
             <div className="flex flex-wrap -m-4">
-              {readmes.length
-                ? readmes
+              {allReadmes.length
+                ? allReadmes
                     .sort((a, b) => (a.owner > b.owner ? 1 : b.owner > a.owner ? -1 : 0))
                     .map((readme) => {
                       return (
-                        <article
-                          key={readme.APIurl}
-                          onClick={(e) => {
-                            handlePreviewClick(readme, e);
-                          }}
-                          className="w-full p-4"
-                        >
-                          <div className="bg-white p-6 rounded-lg shadow-lg">
+                        <article key={readme.APIurl} className="w-full p-4">
+                          <div className={readme.active ? "active bg-white p-6 rounded-lg shadow-lg border border-blue-500" : "bg-white p-6 rounded-lg shadow-lg border border-gray-100"}>
                             <h3 className="tracking-widest text-blue-500 text-xs uppercase">built by</h3>
-                            <a className="text-lg text-gray-300 mb-4 inline-flex items-center hover:text-gray-600" href={readme.ownerLink} target="_blank" rel="noreferrer noopener">
+                            <a className="text-lg text-gray-300 mb-4 inline-flex items-center hover:text-gray-700" href={readme.ownerLink} target="_blank" rel="noreferrer noopener">
                               <span className="text-gray-700">{readme.owner}</span>
                               <ExternalLink size={16} className="ml-2 transition-colors" />
                             </a>
                             <div className="flex justify-center md:justify-end">
                               <button
-                                onClick={(e) => {
-                                  handlePreviewClick(readme, e);
+                                onClick={() => {
+                                  handlePreviewClick(readme);
                                 }}
                                 className="inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-blue-700 rounded-full leading-tight"
                               >
                                 Preview
                               </button>
-                              <a className="ml-4 inline-flex text-gray-500 border-0 py-2 px-6 focus:outline-none hover:text-gray-700 rounded-full leading-tight" href={readme.githubLink} target="_blank" rel="noreferrer noopener">
+                              <button
+                                onClick={() => {
+                                  handleMarkdownCopyClick(readme);
+                                }}
+                                className="ml-6 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight"
+                              >
+                                Copy markdown
+                              </button>
+                              <a className="ml-4 inline-flex items-center text-gray-500 border-0 py-2 px-6 focus:outline-none hover:text-gray-700 rounded-full leading-tight transition-colors" href={readme.githubLink} target="_blank" rel="noreferrer noopener">
                                 View on GitHub
+                                <GitHub size={16} className="ml-2" />
                               </a>
                             </div>
                           </div>
@@ -94,10 +132,10 @@ export default function App() {
             </div>
           </div>
         </section>
-        <aside className={selectedReadme ? "w-1/2 container px-5 pb-24 opacity-100 transition-all duration-500" : "w-0 opacity-0	transition-all duration-500"}>
-          {selectedReadme ? (
+        <aside className={selectedReadme.owner ? "w-1/2 container px-5 pb-24 opacity-100 transition-all duration-500" : "w-0 opacity-0	transition-all duration-500"}>
+          {selectedReadme.owner ? (
             <article className="bg-white p-6 rounded-lg shadow-lg">
-              <div className="-mx-6 -mt-6 mb-4 px-6 py-4 bg-gray-100 flex justify-end items-center sticky top-0">
+              <div className="-mx-6 -mt-6 mb-4 px-6 py-4 bg-gray-100 flex justify-end items-center sticky top-0 z-10">
                 <h2 className="tracking-widest text-blue-500 text-xs uppercase">
                   Built by:&nbsp;
                   <a className="hover:underline" href={selectedReadme.ownerLink} target="_blank" rel="noreferrer noopener">
@@ -105,9 +143,8 @@ export default function App() {
                   </a>
                 </h2>
                 <button
-                  onClick={(e) => {
-                    console.log(selectedReadme.content);
-                    copyMarkdownToClipboard(selectedReadme.content, e);
+                  onClick={() => {
+                    handleMarkdownCopyClick(selectedReadme);
                   }}
                   className="ml-6 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight"
                 >
