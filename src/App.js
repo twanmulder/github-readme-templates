@@ -3,6 +3,7 @@ import ReactMarkdownWithHtml from "react-markdown/with-html";
 import gfm from "remark-gfm";
 import { ExternalLink, GitHub } from "react-feather";
 
+import { decodeFromBase64ToUTF8 } from "./utils/utils";
 import readmes from "./data/readmes";
 
 import Header from "./components/Header";
@@ -20,20 +21,9 @@ export default function App() {
   );
   const selectedReadme = allReadmes.find((readme) => readme.active) || false;
 
-  const decodeContent = (encodedContent) => {
-    return decodeURIComponent(
-      atob(encodedContent)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-  };
-
   const handleData = (response, readmeObject) => {
     const encodedContent = response.content;
-    const decodedContent = decodeContent(encodedContent);
+    const decodedContent = decodeFromBase64ToUTF8(encodedContent);
 
     // Update the content of the matching readme and set it to active
     const updatedReadme = { ...readmeObject, content: decodedContent, active: true };
@@ -75,7 +65,7 @@ export default function App() {
 
     fetch(readme.APIurl)
       .then((result) => result.json())
-      .then((response) => decodeContent(response.content))
+      .then((response) => decodeFromBase64ToUTF8(response.content))
       .then((decodedContent) => {
         const updatedReadmes = allReadmes.map((el) => (el.APIurl === readme.APIurl ? { ...readme, content: decodedContent } : el));
         setAllReadmes(updatedReadmes);
