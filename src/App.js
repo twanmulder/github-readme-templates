@@ -3,7 +3,7 @@ import ReactMarkdownWithHtml from "react-markdown/with-html";
 import gfm from "remark-gfm";
 import { ExternalLink, GitHub } from "react-feather";
 
-import { decodeFromBase64ToUTF8 } from "./utils/utils";
+import { decodeFromBase64ToUTF8, copyStringToClipboard } from "./utils/utils";
 import readmes from "./data/readmes";
 
 import Header from "./components/Header";
@@ -46,21 +46,9 @@ export default function App() {
       .catch((err) => console.log(err));
   };
 
-  const copyMarkdownToClipboard = (readmeContent) => {
-    const el = document.createElement("textarea");
-    el.value = readmeContent;
-    el.setAttribute("readonly", "");
-    el.style.position = "absolute";
-    el.style.left = "-9999px";
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand("copy");
-    document.body.removeChild(el);
-  };
-
   const handleMarkdownCopyClick = (readme) => {
     if (readme.content) {
-      return copyMarkdownToClipboard(readme.content);
+      return copyStringToClipboard(readme.content);
     }
 
     fetch(readme.APIurl)
@@ -69,7 +57,7 @@ export default function App() {
       .then((decodedContent) => {
         const updatedReadmes = allReadmes.map((el) => (el.APIurl === readme.APIurl ? { ...readme, content: decodedContent } : el));
         setAllReadmes(updatedReadmes);
-        copyMarkdownToClipboard(decodedContent);
+        copyStringToClipboard(decodedContent);
       })
       .catch((err) => console.log(err));
   };
