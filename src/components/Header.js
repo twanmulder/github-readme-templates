@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="text-gray-600 body-font">
+    <header className="text-gray-700 body-font">
       <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
         <div className="text-center lg:w-2/3 w-full">
           <h1 className="title-font text-4xl sm:text-6xl mb-4 font-bold text-gray-900">GitHub Templates</h1>
