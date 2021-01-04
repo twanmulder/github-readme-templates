@@ -6,18 +6,6 @@ const READMES = [
     APIurl: "https://api.github.com/repos/ai/size-limit/readme",
   },
   {
-    owner: "Aimeos",
-    ownerLink: "https://github.com/aimeos",
-    githubLink: "https://github.com/aimeos/aimeos-typo3#readme",
-    APIurl: "https://api.github.com/repos/aimeos/aimeos-typo3/readme",
-  },
-  {
-    owner: "Aaron Lichtman",
-    ownerLink: "https://github.com/alichtman",
-    githubLink: "https://github.com/alichtman/stronghold#readme",
-    APIurl: "https://api.github.com/repos/alichtman/stronghold/readme",
-  },
-  {
     owner: "Robin Stickel",
     ownerLink: "https://github.com/robinstickel",
     githubLink: "https://github.com/me-and-company/readme-template#readme",
@@ -30,16 +18,58 @@ const READMES = [
     APIurl: "https://api.github.com/repos/amitmerchant1990/electron-markdownify/readme",
   },
   {
-    owner: "Antonio Federico",
-    ownerLink: "https://github.com/anfederico",
-    githubLink: "https://github.com/anfederico/Clairvoyant#readme",
-    APIurl: "https://api.github.com/repos/anfederico/Clairvoyant/readme",
-  },
-  {
     owner: "NgColombia",
     ownerLink: "https://github.com/ngcolombia",
     githubLink: "https://github.com/ngcolombia/medellin#readme",
     APIurl: "https://api.github.com/repos/ngcolombia/medellin/readme",
+  },
+  {
+    owner: "Billie Thompson",
+    ownerLink: "https://github.com/PurpleBooth",
+    githubLink: "https://github.com/PurpleBooth/a-good-readme-template#readme",
+    APIurl: "https://api.github.com/repos/PurpleBooth/a-good-readme-template/readme",
+  },
+  {
+    owner: "Othneil Drew",
+    ownerLink: "https://github.com/othneildrew",
+    githubLink: "https://github.com/othneildrew/Best-README-Template#readme",
+    APIurl: "https://api.github.com/repos/othneildrew/Best-README-Template/readme",
+  },
+  {
+    owner: "CodeSandbox",
+    ownerLink: "https://github.com/codesandbox",
+    githubLink: "https://github.com/codesandbox/codesandbox-client#readme",
+    APIurl: "https://api.github.com/repos/codesandbox/codesandbox-client/readme",
+  },
+  {
+    owner: "Athitya Kuma",
+    ownerLink: "https://github.com/athityakumar",
+    githubLink: "https://github.com/athityakumar/colorls#readme",
+    APIurl: "https://api.github.com/repos/athityakumar/colorls/readme",
+  },
+  {
+    owner: "GitPoint",
+    ownerLink: "https://github.com/gitpoint",
+    githubLink: "https://github.com/gitpoint/git-point#readme",
+    APIurl: "https://api.github.com/repos/gitpoint/git-point/readme",
+  },
+  {
+    owner: "Harsh Vijay",
+    ownerLink: "https://github.com/iharsh234",
+    githubLink: "https://github.com/iharsh234/WebApp#readme",
+    APIurl: "https://api.github.com/repos/iharsh234/WebApp/readme",
+  },
+  {
+    owner: "Karan Goel",
+    ownerLink: "https://github.com/karan",
+    githubLink: "https://github.com/karan/joe#readme",
+    APIurl: "https://api.github.com/repos/karan/joe/readme",
+  },
+  {
+    owner: "NHN",
+    ownerLink: "https://github.com/nhn",
+    githubLink: "https://github.com/nhn/tui.editor#readme",
+    APIurl: "https://api.github.com/repos/nhn/tui.editor/readme",
   },
 ];
 
