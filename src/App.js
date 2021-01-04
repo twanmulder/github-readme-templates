@@ -6,6 +6,7 @@ import { ExternalLink, GitHub } from "react-feather";
 import readmes from "./data/readmes";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export default function App() {
   const [allReadmes, setAllReadmes] = useState(
@@ -98,8 +99,8 @@ export default function App() {
                         <article key={readme.APIurl} className="w-full p-4">
                           <div className={readme.active ? "active bg-white p-6 rounded-lg shadow-lg border border-blue-500" : "bg-white p-6 rounded-lg shadow-lg border border-gray-100"}>
                             <h3 className="tracking-widest text-blue-500 text-xs uppercase">built by</h3>
-                            <a className="text-lg text-gray-300 mb-4 inline-flex items-center hover:text-gray-700" href={readme.ownerLink} target="_blank" rel="noreferrer noopener">
-                              <span className="text-gray-700">{readme.owner}</span>
+                            <a className="text-lg text-gray-500 mb-4 inline-flex items-center hover:text-gray-700" href={readme.ownerLink} target="_blank" rel="noreferrer noopener">
+                              <span className="text-gray-900">{readme.owner}</span>
                               <ExternalLink size={16} className="ml-2 transition-colors" />
                             </a>
                             <div className="flex justify-center md:justify-end">
@@ -156,6 +157,7 @@ export default function App() {
           ) : null}
         </aside>
       </main>
+      <Footer />
     </>
   );
 }
