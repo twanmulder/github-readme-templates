@@ -17,6 +17,7 @@
     "react-feather": "^2.0.9",
     "react-markdown": "^5.0.3",
     "react-scripts": "4.0.1",
+    "remark-gfm": "^1.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "typeface-pt-sans": "^1.1.13",
     "web-vitals": "^0.2.4"

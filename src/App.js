@@ -1,5 +1,6 @@
 import { useState } from "react";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdownWithHtml from "react-markdown/with-html";
+import gfm from "remark-gfm";
 import { ExternalLink } from "react-feather";
 
 import readmes from "./data/readmes";
@@ -11,7 +12,14 @@ export default function App() {
 
   const handleData = (response, readmeObject) => {
     const encodedContent = response.content;
-    const decodedContent = atob(encodedContent);
+    const decodedContent = decodeURIComponent(
+      atob(encodedContent)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
 
     setSelectedReadme({
       ...readmeObject,
@@ -98,6 +106,7 @@ export default function App() {
                 </h2>
                 <button
                   onClick={(e) => {
+                    console.log(selectedReadme.content);
                     copyMarkdownToClipboard(selectedReadme.content, e);
                   }}
                   className="ml-6 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight"
@@ -105,7 +114,7 @@ export default function App() {
                   Copy markdown
                 </button>
               </div>
-              <ReactMarkdown className="markdown-body" source={selectedReadme.content} />
+              <ReactMarkdownWithHtml className="markdown-body" plugins={[gfm]} children={selectedReadme.content} allowDangerousHtml />
             </article>
           ) : null}
         </aside>
