@@ -132,7 +132,7 @@ export default function App() {
             </div>
           </div>
         </section>
-        <aside className={selectedReadme.owner ? "w-1/2 container px-5 pb-24 opacity-100 transition-all duration-500" : "w-0 opacity-0	transition-all duration-500"}>
+        <aside className={selectedReadme.owner ? "w-1/2 container px-5 pb-24 opacity-100 transition translate-y-0 duration-500" : "w-0 opacity-0 transform translate-y-8 transition duration-500"}>
           {selectedReadme.owner ? (
             <article className="bg-white p-6 rounded-lg shadow-lg">
               <div className="-mx-6 -mt-6 mb-4 px-6 py-4 bg-gray-100 flex justify-end items-center sticky top-0 z-10">
