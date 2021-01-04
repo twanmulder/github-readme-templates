@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 
 import "./index.css";
 import "typeface-pt-sans";
+import "github-markdown-css";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
