@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export function decodeFromBase64ToUTF8(encodedString) {
   return decodeURIComponent(
     atob(encodedString)
@@ -19,4 +21,10 @@ export function copyStringToClipboard(string) {
   el.select();
   document.execCommand("copy");
   document.body.removeChild(el);
+  toast.success("Copied to clipboard", {
+    iconTheme: {
+      primary: "rgb(37, 99, 235)",
+      secondary: "#fff",
+    },
+  });
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import ReactMarkdownWithHtml from "react-markdown/with-html";
 import gfm from "remark-gfm";
 import { ExternalLink, GitHub } from "react-feather";
+import { Toaster } from "react-hot-toast";
 
 import { decodeFromBase64ToUTF8, copyStringToClipboard } from "./utils/utils";
 import readmes from "./data/readmes";
@@ -64,6 +65,7 @@ export default function App() {
 
   return (
     <>
+      <Toaster position="bottom-right" />
       <Header />
       <main className="flex justify-center mx-auto">
         <section className="w-full max-w-2xl text-gray-700">
