@@ -71,6 +71,24 @@ const READMES = [
     githubLink: "https://github.com/nhn/tui.editor#readme",
     APIurl: "https://api.github.com/repos/nhn/tui.editor/readme",
   },
+  {
+    owner: "Dan Bader",
+    ownerLink: "https://github.com/dbader",
+    githubLink: "https://github.com/dbader/readme-template#readme",
+    APIurl: "https://api.github.com/repos/dbader/readme-template/readme",
+  },
+  {
+    owner: "Igor Antun",
+    ownerLink: "https://github.com/IgorAntun",
+    githubLink: "https://github.com/IgorAntun/node-chat#readme",
+    APIurl: "https://api.github.com/repos/IgorAntun/node-chat/readme",
+  },
+  {
+    owner: "Marko Kosir",
+    ownerLink: "https://github.com/mkosir",
+    githubLink: "https://github.com/mkosir/react-parallax-tilt#readme",
+    APIurl: "https://api.github.com/repos/mkosir/react-parallax-tilt/readme",
+  },
 ];
 
 export default READMES;
