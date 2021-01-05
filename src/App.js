@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ReactMarkdownWithHtml from "react-markdown/with-html";
 import gfm from "remark-gfm";
-import { ExternalLink, GitHub } from "react-feather";
+import { ExternalLink, GitHub, Clipboard } from "react-feather";
 import { Toaster } from "react-hot-toast";
 
 import { decodeFromBase64ToUTF8, copyStringToClipboard } from "./utils/utils";
@@ -88,7 +88,7 @@ export default function App() {
                                 onClick={() => {
                                   handlePreviewClick(readme);
                                 }}
-                                className="inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-blue-700 rounded-full leading-tight"
+                                className="inline-flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-blue-700 rounded-full leading-tight transition-colors"
                               >
                                 Preview
                               </button>
@@ -96,13 +96,14 @@ export default function App() {
                                 onClick={() => {
                                   handleMarkdownCopyClick(readme);
                                 }}
-                                className="ml-6 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight"
+                                className="ml-6 inline-flex items-center text-gray-400 hover:text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight transition-colors"
                               >
-                                Copy markdown
+                                <Clipboard size={16} className="mr-2" />
+                                <span className="text-gray-700">Copy markdown</span>
                               </button>
                               <a className="ml-4 inline-flex items-center text-gray-500 border-0 py-2 px-6 focus:outline-none hover:text-gray-700 rounded-full leading-tight transition-colors" href={readme.githubLink} target="_blank" rel="noreferrer noopener">
+                                <GitHub size={16} className="mr-2" />
                                 View on GitHub
-                                <GitHub size={16} className="ml-2" />
                               </a>
                             </div>
                           </div>
@@ -127,8 +128,9 @@ export default function App() {
                   onClick={() => {
                     handleMarkdownCopyClick(selectedReadme);
                   }}
-                  className="ml-6 inline-flex text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight"
+                  className="ml-6 inline-flex items-center text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight transition-colors"
                 >
+                  <Clipboard size={16} className="mr-2 text-gray-400" />
                   Copy markdown
                 </button>
               </div>
