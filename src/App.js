@@ -77,8 +77,8 @@ export default function App() {
                     .map((readme) => {
                       return (
                         <article key={readme.APIurl} className="w-full p-4">
-                          <div className={readme.active ? "active bg-white p-6 rounded-lg shadow-lg border border-blue-500" : "bg-white p-6 rounded-lg shadow-lg border border-gray-100"}>
-                            <h3 className="tracking-widest text-blue-500 text-xs uppercase">built by</h3>
+                          <div className={readme.active ? "active bg-white p-6 rounded-lg shadow-lg border border-blue-300" : "bg-white p-6 rounded-lg shadow-lg border border-gray-100"}>
+                            <h3 className="tracking-widest text-blue-600 text-xs uppercase">built by</h3>
                             <a className="text-lg text-gray-500 mb-6 md:mb-4 inline-flex items-center hover:text-gray-700" href={readme.ownerLink} target="_blank" rel="noreferrer noopener">
                               <span className="text-gray-900">{readme.owner}</span>
                               <ExternalLink size={16} className="ml-2 transition-colors" />
