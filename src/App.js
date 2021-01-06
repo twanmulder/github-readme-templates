@@ -88,7 +88,7 @@ export default function App() {
                                 onClick={() => {
                                   handlePreviewClick(readme);
                                 }}
-                                className="hidden md:inline-flex items-center text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-blue-700 rounded-full leading-tight transition-colors"
+                                className="hidden md:inline-flex items-center text-white bg-blue-600 hover:bg-blue-500 active:bg-blue-700 border-0 py-2 px-6 focus:outline-none rounded-full leading-tight transform-gpu hover:-translate-y-px active:translate-y-px transition"
                               >
                                 <span>Preview</span>
                               </button>
@@ -96,7 +96,7 @@ export default function App() {
                                 onClick={() => {
                                   handleMarkdownCopyClick(readme);
                                 }}
-                                className="md:ml-6 text-sm md:text-base inline-flex items-center justify-center text-gray-400 hover:text-gray-700 bg-gray-200 border-0 py-2 px-4 md:px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight transition-colors"
+                                className="md:ml-6 text-sm md:text-base inline-flex items-center justify-center text-gray-400 active:text-gray-700 bg-gray-200 hover:bg-gray-100 active:bg-gray-300 border-0 py-2 px-4 md:px-6 focus:outline-none rounded-full leading-tight transform-gpu hover:-translate-y-px active:translate-y-px transition"
                               >
                                 <Clipboard size={16} className="mr-2" />
                                 <span className="text-gray-700">Copy markdown</span>
@@ -121,8 +121,8 @@ export default function App() {
         </section>
         <aside className={selectedReadme.owner ? "hidden md:block w-1/2 container px-5 pb-24 opacity-100 transition translate-y-0 duration-500" : "hidden md:block w-0 opacity-0 transform translate-y-8 transition duration-500"}>
           {selectedReadme.owner ? (
-            <article className="bg-white p-6 rounded-lg shadow-lg">
-              <div className="-mx-6 -mt-6 mb-4 px-6 py-4 bg-gray-100 flex justify-end items-center sticky top-0 z-10">
+            <article className="bg-white p-6 rounded-b-lg shadow-lg border border-gray-100">
+              <div className="-mx-6 -mt-6 mb-4 px-6 py-4 bg-gray-50 flex justify-end items-center sticky top-0 z-10">
                 <h2 className="tracking-widest text-blue-500 text-xs uppercase">
                   Built by:&nbsp;
                   <a className="hover:underline" href={selectedReadme.ownerLink} target="_blank" rel="noreferrer noopener">
@@ -133,10 +133,10 @@ export default function App() {
                   onClick={() => {
                     handleMarkdownCopyClick(selectedReadme);
                   }}
-                  className="ml-6 inline-flex items-center text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded-full leading-tight transition-colors"
+                  className="ml-6 inline-flex items-center text-gray-400 active:text-gray-700 bg-gray-200 hover:bg-gray-100 active:bg-gray-300 border-0 py-2 px-6 focus:outline-none rounded-full leading-tight transform-gpu hover:-translate-y-px active:translate-y-px transition"
                 >
-                  <Clipboard size={16} className="mr-2 text-gray-400" />
-                  Copy markdown
+                  <Clipboard size={16} className="mr-2" />
+                  <span className="text-gray-700">Copy markdown</span>
                 </button>
               </div>
               <ReactMarkdownWithHtml className="markdown-body" plugins={[gfm]} children={selectedReadme.content} allowDangerousHtml />

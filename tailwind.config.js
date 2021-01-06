@@ -19,7 +19,11 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ["active"],
+      translate: ["active"],
+      textColor: ["active"],
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };
