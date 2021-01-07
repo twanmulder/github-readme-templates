@@ -12,6 +12,14 @@ ul {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 rgb(219, 234, 254)), var(--tw-ring-shadow, 0 0 rgb(219, 234, 254)), var(--tw-shadow);
 }
 
+.markdown {
+  height: calc(100vh - 2rem);
+}
+
+.markdown-header {
+  backdrop-filter: blur(5px) saturate(1.5);
+}
+
 .markdown-body a {
   display: inline-block;
 }

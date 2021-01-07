@@ -8,6 +8,7 @@ import { decodeFromBase64ToUTF8, copyStringToClipboard } from "./utils/utils";
 import readmes from "./data/readmes";
 
 import Header from "./components/Header";
+import Gradientsvg from "./components/Gradientsvg";
 import Footer from "./components/Footer";
 
 export default function App() {
@@ -38,12 +39,14 @@ export default function App() {
       // Set all readmes active to false and set the selected one to true
       const updatedReadmes = allReadmes.map((el) => (el.APIurl === readme.APIurl ? { ...readme, active: true } : { ...el, active: false }));
       setAllReadmes(updatedReadmes);
+      document.querySelector(".markdown").scrollTop = 0;
     }
 
     // Fetch data if readme doesn't have a content key
     return fetch(readme.APIurl)
       .then((result) => result.json())
       .then((response) => handleData(response, readme))
+      .then(() => (document.querySelector(".markdown").scrollTop = 0))
       .catch((err) => console.log(err));
   };
 
@@ -121,8 +124,8 @@ export default function App() {
         </section>
         <aside className={selectedReadme.owner ? "hidden md:block w-1/2 container px-5 pb-24 opacity-100 transition translate-y-0 duration-500" : "hidden md:block w-0 opacity-0 transform translate-y-8 transition duration-500"}>
           {selectedReadme.owner ? (
-            <article className="bg-white p-6 rounded-b-lg shadow-lg border border-gray-100">
-              <div className="-mx-6 -mt-6 mb-4 px-6 py-4 bg-gray-50 flex justify-end items-center sticky top-0 z-10">
+            <article className="markdown bg-white px-6 pb-6 rounded-lg shadow-lg border border-gray-100 h-screen sticky top-4 overflow-scroll">
+              <div className="markdown-header -mx-6 mb-6 px-6 py-4 bg-gray-50 bg-opacity-75	flex justify-end items-center sticky top-0 z-10">
                 <h2 className="tracking-widest text-blue-500 text-xs uppercase">
                   Built by:&nbsp;
                   <a className="hover:underline" href={selectedReadme.ownerLink} target="_blank" rel="noreferrer noopener">
@@ -139,7 +142,8 @@ export default function App() {
                   <span className="text-gray-700">Copy markdown</span>
                 </button>
               </div>
-              <ReactMarkdownWithHtml className="markdown-body" plugins={[gfm]} children={selectedReadme.content} allowDangerousHtml />
+              <ReactMarkdownWithHtml className="markdown-body -mb-8" plugins={[gfm]} children={selectedReadme.content} allowDangerousHtml />
+              <Gradientsvg />
             </article>
           ) : null}
         </aside>
