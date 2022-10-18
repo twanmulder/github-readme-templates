@@ -20,7 +20,6 @@ export default function SelectedReadme(props) {
           onClick={() => {
             props.handleMarkdownCopyClick(selectedReadme);
           }}
-          data-splitbee-event={`selected-readme-copy-markdown`}
           className="ml-6 inline-flex items-center text-gray-400 active:text-gray-700 bg-gray-200 hover:bg-gray-100 active:bg-gray-300 border-0 py-2 px-6 focus:outline-none rounded-full leading-tight transform-gpu hover:-translate-y-px active:translate-y-px transition"
         >
           <Clipboard size={16} className="mr-2" />
