@@ -27,7 +27,9 @@ export default function App() {
 
     // Update the content of the matching readme and set it to active
     const updatedReadme = { ...readmeObject, content: decodedContent, active: true };
-    const updatedReadmes = allReadmes.map((el) => (el.APIurl === updatedReadme.APIurl ? updatedReadme : { ...el, active: false }));
+    const updatedReadmes = allReadmes.map((el) =>
+      el.APIurl === updatedReadme.APIurl ? updatedReadme : { ...el, active: false }
+    );
     setAllReadmes(updatedReadmes);
   };
 
@@ -35,7 +37,9 @@ export default function App() {
     // No need to fetch new data when its already present
     if (readme.content) {
       // Set all readmes active to false and set the selected one to true
-      const updatedReadmes = allReadmes.map((el) => (el.APIurl === readme.APIurl ? { ...readme, active: true } : { ...el, active: false }));
+      const updatedReadmes = allReadmes.map((el) =>
+        el.APIurl === readme.APIurl ? { ...readme, active: true } : { ...el, active: false }
+      );
       setAllReadmes(updatedReadmes);
       document.querySelector(".markdown").scrollTop = 0;
     }
@@ -57,7 +61,9 @@ export default function App() {
       .then((result) => result.json())
       .then((response) => decodeFromBase64ToUTF8(response.content))
       .then((decodedContent) => {
-        const updatedReadmes = allReadmes.map((el) => (el.APIurl === readme.APIurl ? { ...readme, content: decodedContent } : el));
+        const updatedReadmes = allReadmes.map((el) =>
+          el.APIurl === readme.APIurl ? { ...readme, content: decodedContent } : el
+        );
         setAllReadmes(updatedReadmes);
         copyStringToClipboard(decodedContent);
       })
@@ -71,11 +77,27 @@ export default function App() {
       <main className="flex justify-center mx-auto">
         <section className="w-full max-w-2xl text-gray-700">
           <div className="container px-5 pb-24 mx-auto">
-            <div className="flex flex-wrap -m-4">{allReadmes.length ? <ReadmeList allReadmes={allReadmes} handlePreviewClick={handlePreviewClick} handleMarkdownCopyClick={handleMarkdownCopyClick} /> : null}</div>
+            <div className="flex flex-wrap -m-4">
+              {allReadmes.length ? (
+                <ReadmeList
+                  allReadmes={allReadmes}
+                  handlePreviewClick={handlePreviewClick}
+                  handleMarkdownCopyClick={handleMarkdownCopyClick}
+                />
+              ) : null}
+            </div>
           </div>
         </section>
-        <aside className={selectedReadme.owner ? "hidden md:block w-1/2 container px-5 pb-24 opacity-100 transition translate-y-0 duration-500" : "hidden md:block w-0 opacity-0 transform translate-y-8 transition duration-500"}>
-          {selectedReadme.owner ? <SelectedReadme selectedReadme={selectedReadme} handleMarkdownCopyClick={handleMarkdownCopyClick} /> : null}
+        <aside
+          className={
+            selectedReadme.owner
+              ? "hidden md:block w-1/2 container px-5 pb-24 opacity-100 transition translate-y-0 duration-500"
+              : "hidden md:block w-0 opacity-0 transform translate-y-8 transition duration-500"
+          }
+        >
+          {selectedReadme.owner ? (
+            <SelectedReadme selectedReadme={selectedReadme} handleMarkdownCopyClick={handleMarkdownCopyClick} />
+          ) : null}
         </aside>
       </main>
       <Footer />
