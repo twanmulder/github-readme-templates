@@ -1,51 +1,51 @@
 import { ExternalLink, GitHub, Clipboard } from "react-feather";
 
-const infoForAds = [
-  {
-    title: "Headers that get you more followers. Made in seconds",
-    ctaText: "Start designing for free (no account needed)",
-    href: "https://headers.me?referrer=readme-templates.com",
-    tracking: "headers",
-  },
-  {
-    title: "Your Website Sucks. And I'll Help You Fix It",
-    ctaText: "Read The Free Sample Chapter",
-    href: "https://flurly.com/p/your-website-sucks?referrer=readme-templates.com",
-    tracking: "ebook",
-  },
-];
+// const infoForAds = [
+//   {
+//     title: "Headers that get you more followers. Made in seconds",
+//     ctaText: "Start designing for free (no account needed)",
+//     href: "https://headers.me?referrer=readme-templates.com",
+//     tracking: "headers",
+//   },
+//   {
+//     title: "Your Website Sucks. And I'll Help You Fix It",
+//     ctaText: "Read The Free Sample Chapter",
+//     href: "https://flurly.com/p/your-website-sucks?referrer=readme-templates.com",
+//     tracking: "ebook",
+//   },
+// ];
 
-const renderAd = (index) => {
-  return (
-    <article className="w-full p-4">
-      <div className="active bg-blue-600 p-6 rounded-lg shadow-lg border border-blue-300">
-        <h3 className="tracking-widest text-white text-xs uppercase">advertisement</h3>
-        <a
-          target="_blank"
-          rel="noreferrer noopener"
-          href={infoForAds[index].href}
-          data-splitbee-event={`open-${infoForAds[index].tracking}-ad`}
-          className="text-lg text-white mb-6 md:mb-4 inline-flex items-center hover:opacity-80"
-        >
-          <span className="opacity-90">{infoForAds[index].title}</span>
-          <ExternalLink size={16} className="ml-2 transition-colors" />
-        </a>
-        <div className="flex flex-col	md:flex-row justify-center md:justify-end">
-          <a
-            target="_blank"
-            rel="noreferrer noopener"
-            href={infoForAds[index].href}
-            data-splitbee-event={`open-${infoForAds[index].tracking}-ad`}
-            className="hidden md:inline-flex items-center text-white bg-blue-500 hover:bg-blue-400 active:bg-blue-700 border-0 py-2 px-6 focus:outline-none rounded-full leading-tight transform-gpu hover:-translate-y-px active:translate-y-px transition"
-          >
-            <ExternalLink size={16} className="mr-2" />
-            <span>{infoForAds[index].ctaText}</span>
-          </a>
-        </div>
-      </div>
-    </article>
-  );
-};
+// const renderAd = (index) => {
+//   return (
+//     <article className="w-full p-4">
+//       <div className="active bg-blue-600 p-6 rounded-lg shadow-lg border border-blue-300">
+//         <h3 className="tracking-widest text-white text-xs uppercase">advertisement</h3>
+//         <a
+//           target="_blank"
+//           rel="noreferrer noopener"
+//           href={infoForAds[index].href}
+//           data-splitbee-event={`open-${infoForAds[index].tracking}-ad`}
+//           className="text-lg text-white mb-6 md:mb-4 inline-flex items-center hover:opacity-80"
+//         >
+//           <span className="opacity-90">{infoForAds[index].title}</span>
+//           <ExternalLink size={16} className="ml-2 transition-colors" />
+//         </a>
+//         <div className="flex flex-col	md:flex-row justify-center md:justify-end">
+//           <a
+//             target="_blank"
+//             rel="noreferrer noopener"
+//             href={infoForAds[index].href}
+//             data-splitbee-event={`open-${infoForAds[index].tracking}-ad`}
+//             className="hidden md:inline-flex items-center text-white bg-blue-500 hover:bg-blue-400 active:bg-blue-700 border-0 py-2 px-6 focus:outline-none rounded-full leading-tight transform-gpu hover:-translate-y-px active:translate-y-px transition"
+//           >
+//             <ExternalLink size={16} className="mr-2" />
+//             <span>{infoForAds[index].ctaText}</span>
+//           </a>
+//         </div>
+//       </div>
+//     </article>
+//   );
+// };
 
 const renderReadme = (readme, index, props) => {
   return (
@@ -110,8 +110,8 @@ export default function ReadmeList(props) {
   });
 
   // Add ads
-  renderedReadmes.splice(2, 0, renderAd(0));
-  renderedReadmes.splice(12, 0, renderAd(1));
+  // renderedReadmes.splice(2, 0, renderAd(0));
+  // renderedReadmes.splice(12, 0, renderAd(1));
 
   return renderedReadmes;
 }
